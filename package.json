@@ -45,6 +45,7 @@
     "gulp-watch": "^4.3.10",
     "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
+    "octonode": "^0.7.6",
     "postcss-import": "^8.1.2",
     "postcss-loader": "^1.0.0",
     "postcss-modules": "^0.5.2",
