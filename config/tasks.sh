@@ -224,7 +224,7 @@ wait_for_port() {
 application_start() {
   application_stop
 
-  if [ ! -f private.env ]; then
+  if [ ! -f ./config/private.env ]; then
     echo "Error config/private.env was not found."
     echo "Please create a private.env file based on the config/private.env.tpl file"
     exit 0
