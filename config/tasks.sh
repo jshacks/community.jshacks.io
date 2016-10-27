@@ -50,7 +50,7 @@ repeat_char() {
   times=$1
   char=$2
   result=""
-  for ((i = 0; i < $times; i++)); do
+  for ((i = 0; i <= $times - 1; i++)); do
     result="${result}${char}"
   done
   echo $result
