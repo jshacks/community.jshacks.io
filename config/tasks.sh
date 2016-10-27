@@ -243,6 +243,7 @@ application_start() {
     -d \
     -e $application_env \
     --env-file ./config/vars.env \
+    --env-file ./config/private.env \
     -t \
     --name $APP_CONTAINER_NAME \
     $APP_IMAGE_NAME bash -c "${TASKS_SCRIPT} server_start" > /dev/null
