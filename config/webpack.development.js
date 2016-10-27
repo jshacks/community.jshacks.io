@@ -56,7 +56,7 @@ const conf = new Config()
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
       new HtmlWebpackPlugin({
         inject: false,
-        template: `${process.env.CLIENT_PATH}/index.ejs`,
+        template: `${process.env.CLIENT_PATH}/index.html`,
         mobile: true,
         baseHref: process.env.HOST_IP,
         appMountId: 'app',
