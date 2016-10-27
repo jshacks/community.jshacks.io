@@ -215,6 +215,10 @@ wait_for_port() {
 
 }
 
+get_host_ip() {
+  echo $(ip add | grep 'global' | awk '{ print $2}' | cut -d/ -f1)
+}
+
 #####################
 # APPLICATION TASKS #
 #####################
@@ -240,7 +244,6 @@ application_start() {
   docker run \
     -v $PWD:/app \
     -h $APP_CONTAINER_NAME \
-    -p $HOST_PORT:$LOCAL_PORT \
     -d \
     -e $application_env \
     --env-file $PUBLIC_VARS \
@@ -249,7 +252,7 @@ application_start() {
     --name $APP_CONTAINER_NAME \
     $APP_IMAGE_NAME bash -c "${TASKS_SCRIPT} server_start" > /dev/null
 
-  set_host $APP_CONTAINER_NAME
+  #set_host $APP_CONTAINER_NAME
 
   subtitle "WARNING! Cross domain requests will be blocked by your browser."
   echo "Run ''' npm run browser ''' to launch \" chromium-browser --disable-web-security \" mode to bypass these CORS issues"
@@ -278,12 +281,23 @@ browser_start() {
 # @type build
 # @environment container
 server_start() {
+
+  export BASE_URL=$(get_host_ip)
+  export HOST_IP=$(get_host_ip)
+
   export NODE_ENV=$APP_ENV
   export BASE_PATH=$APP_BASE_PATH
-  export BASE_URL=$BASE_URL
 
-  echo '----- BASE URL '
-  echo $BASE_URL
+ echo "
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+     Client application: ${HOST_IP}:${WEBPACK_PORT}
+
+     Server application: ${HOST_IP}:${HOST_PORT}
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+"
 
   case $NODE_ENV in
     development)
@@ -299,6 +313,7 @@ server_start() {
       echo "NODE_ENV must be one of the following: {development|production|test}"
       exit 1
   esac
+
 }
 
 # Tests if dependencies are met and informs the user if any action

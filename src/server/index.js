@@ -1,15 +1,13 @@
 import express from 'express'
 import fs from 'fs'
 
-import users from './scripts/users'
-
-const PORT = process.env.LOCAL_PORT
+// import users from './scripts/users'
 
 const server = express()
 const router = express.Router()
 
 const foo = {
-  bam: 'baz'
+  this_is: 'working'
 }
 
 router.all('*', (eq, res) => {
@@ -19,9 +17,4 @@ router.all('*', (eq, res) => {
 
 server.use(process.env.BASE_PATH, router)
 
-const app = server.listen(PORT, function () {
-  let host = app.address().address
-  let port = app.address().port
-
-  console.log('JSHacks community server listening at http://%s:%s', host, port)
-})
+const app = server.listen(process.env.HOST_PORT)
