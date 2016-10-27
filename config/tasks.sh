@@ -73,7 +73,7 @@ wrap_text() {
 # @param string
 separator() {
   text=$1
-  len=$(expr length "${text}")
+  len=${#text}
   chars=$(repeat_char $len $separator_char)
   echo $chars
 }
