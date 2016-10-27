@@ -11,12 +11,13 @@ PARAM1=$2
 PARAM2=$3
 PARAM3=$4
 
-APP_CONTAINER_NAME="jshacks-community"
-APP_IMAGE_NAME="jshacks/community"
-APP_PORT=8080
+PUBLIC_VARS=./config/public.env
+PRIVATE_VARS=./config/private.env
+
+export $(cat $PUBLIC_VARS | grep -v ^# | xargs)
+
 GULP_SCRIPT="/app/node_modules/.bin/gulp --gulpfile /app/config/gulpfile.babel.js"
 TASKS_SCRIPT="/app/config/tasks.sh"
-DIST_PATH=/app/dist/
 
 # Display variables
 red=`tput setaf 1`
@@ -224,7 +225,7 @@ wait_for_port() {
 application_start() {
   application_stop
 
-  if [ ! -f ./config/private.env ]; then
+  if [ ! -f $PRIVATE_ENV ]; then
     echo "Error config/private.env was not found."
     echo "Please create a private.env file based on the config/private.env.tpl file"
     exit 0
@@ -239,11 +240,11 @@ application_start() {
   docker run \
     -v $PWD:/app \
     -h $APP_CONTAINER_NAME \
-    -p $APP_PORT:8080 \
+    -p $HOST_PORT:$LOCAL_PORT \
     -d \
     -e $application_env \
-    --env-file ./config/vars.env \
-    --env-file ./config/private.env \
+    --env-file $PUBLIC_VARS \
+    --env-file $PRIVATE_VARS \
     -t \
     --name $APP_CONTAINER_NAME \
     $APP_IMAGE_NAME bash -c "${TASKS_SCRIPT} server_start" > /dev/null
@@ -251,7 +252,7 @@ application_start() {
   set_host $APP_CONTAINER_NAME
 
   subtitle "WARNING! Cross domain requests will be blocked by your browser."
-  echo "Run ''' npm run browser ''' to launch \" chromium-browser --disable-web-security \" mode to bypass these issues or"
+  echo "Run ''' npm run browser ''' to launch \" chromium-browser --disable-web-security \" mode to bypass these CORS issues"
 
   docker logs -f $APP_CONTAINER_NAME
 }
@@ -267,7 +268,7 @@ application_stop() {
 # @type build
 # @environment local machine
 browser_start() {
-  chromium-browser --user-data-dir --disable-web-security http://$APP_CONTAINER_NAME:$APP_PORT &
+  chromium-browser --user-data-dir --disable-web-security http://$APP_CONTAINER_NAME:$HOST_PORT &
 }
 
 # Starts the application server
@@ -384,7 +385,8 @@ application_execute() {
   docker run \
     -v $PWD:/app \
     -h $APP_CONTAINER_NAME \
-    --env-file ./config/vars.env \
+    --env-file $PUBLIC_VARS \
+    --env-file $PRIVATE_VARS \
     -e APP_ENV \
     -t \
     --rm \

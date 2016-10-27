@@ -3,7 +3,7 @@ import fs from 'fs'
 
 import users from './scripts/users'
 
-const PORT = process.env.HOST_PORT
+const PORT = process.env.LOCAL_PORT
 
 const server = express()
 const router = express.Router()
