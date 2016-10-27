@@ -17,4 +17,6 @@ router.all('*', (eq, res) => {
 
 server.use(process.env.BASE_PATH, router)
 
-const app = server.listen(process.env.HOST_PORT)
+const app = server.listen(process.env.HOST_PORT, () => {
+  console.log('Server started')
+})
