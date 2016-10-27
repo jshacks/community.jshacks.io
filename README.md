@@ -1,8 +1,8 @@
 # JSHacks Community Platform
 
-[![Travis Build Status](https://travis-ci.org/jshacks/boilerplate.svg?branch=master)](https://travis-ci.org/jshacks/boilerplate)
-[![devDependency Status](https://david-dm.org/jshacks/boilerplate/dev-status.svg)](https://david-dm.org/jshacks/boilerplate?type=dev)
-[![Join the Electron Community on Slack](http://159.203.166.178/badge.svg)](http://159.203.166.178)
+[![Travis Build Status](https://travis-ci.org/jshacks/community.jshacks.io.svg?branch=master)](https://travis-ci.org/jshacks/boilerplate)
+[![devDependency Status](https://david-dm.org/jshacks/community.jshacks.io/dev-status.svg)](https://david-dm.org/jshacks/boilerplate?type=dev)
+[![Join the JSHacks Community on Slack](http://159.203.166.178/badge.svg)](http://159.203.166.178)
 
 The **objective** of the JSHacks Community Platform is to make all efforts & achievements of its Members visible and to encourage & streamline the process of contributing.
 
@@ -19,13 +19,16 @@ behavior to contact@jshacks.io.
 
 ## Quick Start
 
-**Prerequisites**: ` docker `
+**Prerequisites**: 
 
+` docker > V 1.10 ` -
 Install guides for docker on your platform:
-
 [OSX](https://docs.docker.com/docker-for-mac) |
 [Windows](https://docs.docker.com/docker-for-windows) |
 [Linux](https://docker.github.io/engine/installation/linux)
+
+` npm > V 3 ` -
+Install guides for npm can be found [here](https://nodejs.org/en/download) or to update [here](https://docs.npmjs.com/getting-started/installing-node).
 
 **Install**:
 ```bash
