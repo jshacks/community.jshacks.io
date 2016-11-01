@@ -15,6 +15,8 @@ const envVars = {
 
 const exclude = /node_modules/
 
+const HOST_IP = process.env.HOST_IP === 'localhost' ? '0.0.0.0' : process.env.HOST_IP
+
 const conf = new Config()
   .extend('./webpack.base.js')
   .merge({
@@ -31,7 +33,7 @@ const conf = new Config()
     },
     entry: {
       server: [
-        `webpack-dev-server/client?http://${process.env.HOST_IP}:${process.env.WEBPACK_PORT}`,
+        `webpack-dev-server/client?http://${HOST_IP}:${process.env.WEBPACK_PORT}`,
         'webpack/hot/dev-server'
       ],
       app: [
@@ -58,9 +60,9 @@ const conf = new Config()
         inject: false,
         template: `${process.env.CLIENT_PATH}/index.html`,
         mobile: true,
-        baseHref: process.env.HOST_IP,
+        baseHref: HOST_IP,
         appMountId: 'app',
-        devServer: `http://${process.env.HOST_IP}:${process.env.WEBPACK_PORT}`,
+        devServer: `http://${HOST_IP}:${process.env.WEBPACK_PORT}`,
         title: process.env.APP_TITLE,
         hash: true,
         favicon: `${process.env.CLIENT_PATH}/assets/favicon.ico`
@@ -74,7 +76,7 @@ const conf = new Config()
       progress: true,
       stats: 'errors-only',
       port: process.env.WEBPACK_PORT,
-      host: process.env.HOST_IP,
+      host: HOST_IP,
     },
     module: {
       noParse: [

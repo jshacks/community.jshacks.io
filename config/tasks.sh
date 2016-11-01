@@ -248,6 +248,8 @@ application_start() {
     -e $application_env \
     --env-file $PUBLIC_VARS \
     --env-file $PRIVATE_VARS \
+    -p $HOST_PORT:$HOST_PORT \
+    -p $WEBPACK_PORT:$WEBPACK_PORT \
     -t \
     --name $APP_CONTAINER_NAME \
     $APP_IMAGE_NAME bash -c "${TASKS_SCRIPT} server_start" > /dev/null
@@ -281,9 +283,6 @@ browser_start() {
 # @type build
 # @environment container
 server_start() {
-
-  export BASE_URL=$(get_host_ip)
-  export HOST_IP=$(get_host_ip)
 
   export NODE_ENV=$APP_ENV
   export BASE_PATH=$APP_BASE_PATH
