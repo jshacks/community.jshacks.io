@@ -4,13 +4,12 @@ import VueRouter from 'vue-router';
 import TestRoute from 'app/components/TestRoute/index.vue';
 import Header from 'app/components/Header/index.vue';
 
-import mainTemplate from 'app/main.html';
+import mainTemplate from 'html!./app/main.html';
 console.log(mainTemplate)
 
 Vue.use(VueRouter);
 
 const Bar = { template: '<div>This is the bar route</div>' };
-
 
 const routes = [
   { path: '/', 

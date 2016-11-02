@@ -27,7 +27,6 @@ module.exports = new Config().merge({
     preLoaders: [
       { test: /\.yml|\.yaml$/, exclude: exclude, loader: 'json-loader!yaml-loader' },
       { test: /\.json$/, exclude: exclude, loader: 'json-loader' },
-      { test: /\.html$/, include: '/src/client/app/', loader: 'html-loader' },
       { test: /\.png$/, loader: 'url-loader?limit=5000' },
       { test: /\.css$/, include: /node_modules/, loader: "style-loader!css-loader" },
       { test: /\.css$/, exclude: /node_modules/, loader: "style-loader!css-loader!postcss-loader" },
