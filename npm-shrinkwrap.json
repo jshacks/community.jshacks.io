@@ -122,6 +122,11 @@
       "from": "assert-plus@>=0.2.0 <0.3.0",
       "resolved": "https://registry.npmjs.org/assert-plus/-/assert-plus-0.2.0.tgz"
     },
+    "ast-types": {
+      "version": "0.9.0",
+      "from": "ast-types@0.9.0",
+      "resolved": "https://registry.npmjs.org/ast-types/-/ast-types-0.9.0.tgz"
+    },
     "async": {
       "version": "1.5.2",
       "from": "async@>=1.5.0 <2.0.0",
@@ -1154,6 +1159,11 @@
       "version": "2.0.1",
       "from": "es6-template-strings@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/es6-template-strings/-/es6-template-strings-2.0.1.tgz"
+    },
+    "es6-templates": {
+      "version": "0.2.3",
+      "from": "es6-templates@>=0.2.2 <0.3.0",
+      "resolved": "https://registry.npmjs.org/es6-templates/-/es6-templates-0.2.3.tgz"
     },
     "escape-html": {
       "version": "1.0.3",
@@ -2541,6 +2551,11 @@
       "version": "1.1.1",
       "from": "html-comment-regex@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/html-comment-regex/-/html-comment-regex-1.1.1.tgz"
+    },
+    "html-loader": {
+      "version": "0.4.4",
+      "from": "html-loader@latest",
+      "resolved": "https://registry.npmjs.org/html-loader/-/html-loader-0.4.4.tgz"
     },
     "html-minifier": {
       "version": "3.1.0",
@@ -4626,6 +4641,18 @@
       "version": "2.1.0",
       "from": "readdirp@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/readdirp/-/readdirp-2.1.0.tgz"
+    },
+    "recast": {
+      "version": "0.11.15",
+      "from": "recast@>=0.11.12 <0.12.0",
+      "resolved": "https://registry.npmjs.org/recast/-/recast-0.11.15.tgz",
+      "dependencies": {
+        "esprima": {
+          "version": "3.1.1",
+          "from": "esprima@>=3.1.0 <3.2.0",
+          "resolved": "https://registry.npmjs.org/esprima/-/esprima-3.1.1.tgz"
+        }
+      }
     },
     "rechoir": {
       "version": "0.6.2",

@@ -65,6 +65,7 @@
   "dependencies": {
     "css-loader": "^0.25.0",
     "firebase": "^3.5.3",
+    "html-loader": "^0.4.4",
     "vue": "^2.0.3",
     "vue-loader": "^9.7.0",
     "vue-router": "^2.0.1",
