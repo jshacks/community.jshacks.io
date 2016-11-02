@@ -45,7 +45,11 @@
 <% } %>
 
 <% if (htmlWebpackPlugin.options.appMountId) { %>
-<div id="<%= htmlWebpackPlugin.options.appMountId%>"></div>
+<div id="<%= htmlWebpackPlugin.options.appMountId%>">
+  <router-link to="/test">Go to Test</router-link>
+  <router-link to="/bar">Go to Bar</router-link>
+  <router-view></router-view>
+</div>
 <% } %>
 
 <% if (htmlWebpackPlugin.options.appMountIds && htmlWebpackPlugin.options.appMountIds.length > 0) { %>
