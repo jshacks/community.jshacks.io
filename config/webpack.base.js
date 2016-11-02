@@ -17,7 +17,7 @@ module.exports = new Config().merge({
       'node_modules'
     ],
     alias: {
-
+      'vue$': 'vue/dist/vue.js'
     }
   },
   plugins: [
@@ -37,6 +37,9 @@ module.exports = new Config().merge({
       { test: /\.eot$/, loader: 'file-loader?prefix=font/' },
       { test: /\.ttf$/, loader: 'file-loader?prefix=font/' },
       { test: /\.svg$/, loader: 'file-loader?prefix=font/' }
+    ],
+    loaders: [
+      { test: /\.vue$/, loader: "vue" }
     ]
   },
   postcss: function () {
