@@ -35,7 +35,6 @@ const router = new VueRouter({
   routes,
 });
 
-/* eslint-disable no-new, no-unused-vars */
 const app = new Vue({
   router,
   template: mainTemplate,
