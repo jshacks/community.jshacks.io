@@ -7,5 +7,51 @@
         <router-link to="/members/131212">Go to individual member</router-link>
         <router-link to="/communities">Go to Communities</router-link>
         <router-link to="/communities/123123">Go to individual community</router-link>
+        <ul>
+            <li v-for="item in items">{{ item.text }}
+                <button @click="removeTodo(item['.key'])">X</button>
+            </li>
+        </ul>
+        <form @submit.prevent="addTodo">
+            <input v-model="newTodo" />
+            <button>Add #{{ items.length }}</button>
+        </form>
     </div>
 </template>
+
+<script>
+    import Vue from 'vue';
+    import VueFire from 'vuefire';
+    import Firebase from 'firebase';
+
+    Vue.use(VueFire);
+    var firebaseApp = Firebase.initializeApp({
+        databaseURL: "https://testvue-d8cf9.firebaseio.com/",
+    });
+    var db = firebaseApp.database()
+
+    
+    export default {
+        data: function() {
+            return {
+                newTodo: ""
+            }
+        },
+        methods: {
+            addTodo: function() {
+                if(this.newTodo.trim()) {
+                    this.$firebaseRefs.items.push({
+                        text: this.newTodo
+                    });
+                }
+                this.newTodo = "";
+            },
+            removeTodo: function(key) {
+                this.$firebaseRefs.items.child(key).remove();
+            }
+        },
+        firebase: {
+            items: db.ref('items')
+        }
+    }
+</script>
