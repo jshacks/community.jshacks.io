@@ -20,17 +20,7 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import VueFire from 'vuefire';
-    import Firebase from 'firebase';
-
-    Vue.use(VueFire);
-    var firebaseApp = Firebase.initializeApp({
-        databaseURL: "https://testvue-d8cf9.firebaseio.com/",
-    });
-    var db = firebaseApp.database()
-
-    
+    import { membersDB } from '../../database/firebaseinit.js';
     export default {
         data: function() {
             return {
@@ -51,7 +41,7 @@
             }
         },
         firebase: {
-            items: db.ref('items')
+            items: membersDB
         }
     }
 </script>
