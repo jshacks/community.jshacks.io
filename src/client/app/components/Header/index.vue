@@ -16,11 +16,19 @@
             <input v-model="newTodo" />
             <button>Add #{{ items.length }}</button>
         </form>
+        <div class="signin">
+            <button @click.prevent="authWithGithub">auth</button>
+        </div>
     </div>
 </template>
 
 <script>
-    import { membersDB } from '../../database/firebaseinit.js';
+    import { membersDB, Firebase } from '../../database/firebaseinit.js';
+
+    let provider = new Firebase.auth.GithubAuthProvider();
+
+    provider.addScope('repo');
+
     export default {
         data: function() {
             return {
@@ -38,6 +46,18 @@
             },
             removeTodo: function(key) {
                 this.$firebaseRefs.items.child(key).remove();
+            },
+            authWithGithub: function() {
+                Firebase.auth().signInWithPopup(provider).then(function(result) {
+                    let token = result.credential.accessToken;
+                    let user = result.user;
+                    console.log(token, user, result);
+
+                    console.log(Firebase.User);
+                }).catch(function(error) {
+                    console.log(error);
+                    console.log(Firebase.User);
+                });
             }
         },
         firebase: {
