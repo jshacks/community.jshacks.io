@@ -1,8 +1,11 @@
 import express from 'express'
 import fs from 'fs'
 
-// import users from './scripts/users'
+// import users from 'jobs/users'
+// import repos from 'jobs/repos'
+import members from 'jobs/members'
 
+/*
 const server = express()
 const router = express.Router()
 
@@ -20,3 +23,4 @@ server.use(process.env.BASE_PATH, router)
 const app = server.listen(process.env.HOST_PORT, () => {
   console.log('Server started')
 })
+*/

@@ -1,3 +1,4 @@
+/*
 import github from 'octonode'
 import * as Kefir from 'kefir'
 
@@ -38,4 +39,5 @@ Kefir.stream(emitter => {
 
 //team.members(cb)
 //org.info(cb)
+*/
 

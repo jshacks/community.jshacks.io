@@ -1,0 +1,30 @@
+member:
+  id: integer
+  login: string
+  avatar_url: url
+  gravatar_id: integer
+  html_url: url
+  name: string
+  company: string
+  blog: string
+  location: string
+  email: email
+  hireable: string
+  bio: string
+  created_at: timestamp
+  updated_a: timestamp
+
+repo:
+  id: integer
+  name: string
+  full_name: string
+  private: boolean
+  html_url: url
+  description: string
+  fork: boolean
+  created_at: timestamp
+  updated_at: timestamp
+  homepage: url
+  stargazers_count: integer
+  watchers_count: integer
+  forks_count: integer
