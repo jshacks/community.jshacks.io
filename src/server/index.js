@@ -3,7 +3,7 @@ import fs from 'fs'
 
 // import users from 'jobs/users'
 // import repos from 'jobs/repos'
-import members from 'jobs/members'
+import members from 'server/jobs/members'
 
 /*
 const server = express()

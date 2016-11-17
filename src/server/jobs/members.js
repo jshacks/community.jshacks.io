@@ -1,11 +1,48 @@
-import githubClient from 'clients/github'
-import firebaseClient from 'clients/firebase'
-import handle from 'lib/handle'
+import githubClient from 'server/clients/github'
+import firebaseClient from 'server/clients/firebase'
+import handle from 'server/lib/handle'
 import Kefir from 'kefir'
+import yamljs from 'yamljs'
+
+const schema = yamljs.load('/app/src/schema.yml')
 
 const org = githubClient.org(process.env.GITHUB_ORGANIZATION)
 const opts = {
   per_page: 1
+}
+
+const combineInfo = (info, followers, repos, orgs) => {
+
+  info  = pick(keys(schema.user_info), info)
+
+  info = evolve({
+    created_at: x => new Date(x).getTime(),
+    updated_at: x => new Date(x).getTime(),
+  }, info)
+
+  followers = {
+    followers: pipe(
+      map(pick(keys(schema.follower))),
+      map(x => ([x.id, true])),
+      fromPairs
+    )(followers)
+  }
+
+  repos = {
+    repos: pipe(
+      map(pick(keys(schema.repo))),
+      map(x => ([x.id, x])),
+      fromPairs
+    )(repos)
+  }
+
+  /*
+  orgs = {
+    orgs: orgs
+  }
+  */
+
+  return mergeAll([info, followers, repos, orgs])
 }
 
 const stream = handle(org, 'members', opts)
@@ -13,34 +50,12 @@ const stream = handle(org, 'members', opts)
   .flatMap(x => {
     let user = githubClient.user(x.login)
     let getData = ['info', 'followers', 'repos', 'orgs']
-    return Kefir.merge(map(x => handle(user, x), getData))
+    let streams = map(x => handle(user, x), getData)
+    return Kefir.combine(streams, combineInfo)
   })
-  .bufferWhile(T)
-/*
-  .map(pick([
-    'id',
-    'login',
-    'avatar_url',
-    'gravatar_id',
-    'html_url',
-    'name',
-    'company',
-    'blog',
-    'location',
-    'email',
-    'hireable',
-    'bio',
-    'created_at',
-    'updated_at'
-  ]))
-  .map(evolve({
-    created_at: x => new Date(x).getTime(),
-    updated_at: x => new Date(x).getTime(),
-  }))
-  */
   .onValue(x => console.log(x))
 
-/*
+  /*
 stream.onValue(x =>
   firebaseClient
   .ref('members_git')

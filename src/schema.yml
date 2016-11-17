@@ -1,4 +1,4 @@
-member:
+user_info:
   id: integer
   login: string
   avatar_url: url
@@ -13,6 +13,9 @@ member:
   bio: string
   created_at: timestamp
   updated_a: timestamp
+
+follower:
+  id: integer
 
 repo:
   id: integer
